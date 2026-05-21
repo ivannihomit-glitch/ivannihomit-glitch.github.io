@@ -1,0 +1,458 @@
+/* ===== RESET И БАЗОВЫЕ СТИЛИ ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f7fc;
+  color: #111;
+  line-height: 1.4;
+  scroll-behavior: smooth;
+}
+
+/* Контейнер */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== HEADER (шапка) ===== */
+.header {
+  background: #0a0f1e;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 18px 0;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #e1b42b, #ff6a2c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.logo:hover {
+  opacity: 0.85;
+}
+.logo-accent {
+  background: none;
+  color: #ff7b2c;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.nav-links a:hover {
+  color: #ff7b2c;
+}
+.btn-outline-light {
+  background: transparent;
+  border: 1.5px solid #ff7b2c;
+  padding: 8px 20px;
+  border-radius: 40px;
+  color: #ff7b2c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-outline-light:hover {
+  background: #ff7b2c;
+  color: #0a0f1e;
+  transform: scale(0.97);
+}
+
+/* ===== ВВЕДЕНИЕ (INTRO) ===== */
+.intro {
+  background: linear-gradient(120deg, #ffffff 0%, #fef7e8 100%);
+  padding: 60px 0 40px;
+  border-bottom: 1px solid #ffdec2;
+}
+.intro-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 50px;
+}
+.intro-text {
+  flex: 1.2;
+}
+.intro-badge {
+  background: #ff6a2c20;
+  color: #ff6a2c;
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+.intro-text h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: #0a0f1e;
+}
+.intro-text h2 span {
+  color: #ff6a2c;
+}
+.intro-text p {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+.intro-stats {
+  display: flex;
+  gap: 32px;
+  margin: 28px 0 24px;
+}
+.stat {
+  text-align: left;
+}
+.stat-number {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #ff6a2c;
+}
+.intro-btn {
+  background: #0a0f1e;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.intro-btn:hover {
+  background: #ff6a2c;
+  transform: scale(0.98);
+}
+.intro-img {
+  flex: 0.9;
+  text-align: center;
+}
+.intro-img img {
+  max-width: 100%;
+  border-radius: 32px;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== HERO СЕКЦИЯ ===== */
+.hero {
+  background: linear-gradient(107deg, #0f1424 0%, #1e1b2f 100%);
+  color: white;
+  padding: 60px 0 70px;
+}
+.hero-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+.hero-text {
+  flex: 1;
+}
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.hero-text h1 i {
+  color: #ff8c42;
+  font-style: normal;
+}
+.hero-text p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 32px;
+}
+.btn-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: #ff6a2c;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 48px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(255, 106, 44, 0.3);
+}
+.btn-primary:hover {
+  background: #e55a1f;
+  transform: scale(0.97);
+}
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 14px 32px;
+  border-radius: 48px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.hero-img {
+  flex: 1;
+  text-align: center;
+}
+.hero-img img {
+  max-width: 100%;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
+  border-radius: 32px;
+}
+
+/* ===== КАТАЛОГ (КАРТОЧКИ) ===== */
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 60px 0 20px;
+  text-align: center;
+}
+.section-sub {
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: 48px;
+}
+.bikes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+.bike-card {
+  background: white;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.bike-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 40px rgba(0, 0, 0, 0.12);
+}
+.card-img {
+  background: #eef2f9;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.card-img img {
+  max-height: 170px;
+  width: auto;
+  transition: 0.2s;
+}
+.card-content {
+  padding: 24px;
+}
+.bike-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.bike-desc {
+  color: #4a5568;
+  margin: 12px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.price {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ff6a2c;
+  margin: 10px 0;
+}
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.btn-card {
+  flex: 1;
+  background: #f0f2f5;
+  border: none;
+  padding: 10px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.85rem;
+}
+.btn-card.buy {
+  background: #0a0f1e;
+  color: white;
+}
+.btn-card.buy:hover {
+  background: #ff6a2c;
+}
+.btn-card.details:hover {
+  background: #e2e6ec;
+}
+
+/* ===== ПРЕИМУЩЕСТВА ===== */
+.features {
+  background: white;
+  border-radius: 48px;
+  margin: 60px 0;
+  padding: 48px 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+  text-align: center;
+}
+.feature-item {
+  flex: 1;
+  min-width: 180px;
+}
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+/* ===== ФОРМА ЗАЯВКИ ===== */
+.callback-form {
+  background: #0a0f1e;
+  border-radius: 40px;
+  padding: 48px 40px;
+  margin: 40px 0 80px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-text {
+  flex: 1;
+}
+.form-text h3 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  flex: 1.5;
+}
+.form-group input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 60px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  min-width: 180px;
+}
+.form-group button {
+  background: #ff6a2c;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 60px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.form-group button:hover {
+  background: #ff863e;
+}
+
+/* ===== ФУТЕР ===== */
+.footer {
+  background: #0a0f1e;
+  color: #9ca3af;
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid #1f2937;
+}
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.footer-btn {
+  background: none;
+  border: 1px solid #374151;
+  padding: 8px 24px;
+  border-radius: 40px;
+  color: #ddd;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.footer-btn:hover {
+  background: #ff6a2c;
+  border-color: #ff6a2c;
+  color: white;
+}
+
+/* ===== TOAST-УВЕДОМЛЕНИЯ ===== */
+.toast-msg {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 60px;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: 0.2s;
+  pointer-events: none;
+}
+.toast-msg.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
+}

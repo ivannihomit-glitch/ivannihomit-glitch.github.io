@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="MotoRide – продажа мотоциклов по всей России. Большой каталог, кредит 0%, доставка, гарантия. Все кнопки кликабельны!">
+  <title>MotoRide | Продажа мотоциклов – официальный дилер</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Подключаем CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="nav">
+      <div class="logo" id="logoBtn">🏍️ Moto<span class="logo-accent">Ride</span></div>
+      <div class="nav-links">
+        <a id="navCatalog">🏍️ Модели</a>
+        <a id="navFeatures">⭐ Преимущества</a>
+        <a id="navContact">📞 Контакты</a>
+        <button class="btn-outline-light" id="headerCallbackBtn">📱 Заказать звонок</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="intro">
+  <div class="container intro-grid">
+    <div class="intro-text">
+      <div class="intro-badge">⚡ Добро пожаловать в MotoRide</div>
+      <h2>Больше чем продажа мотоциклов — <span>философия свободы</span></h2>
+      <p>Наша команда подбирает технику, которая станет продолжением вашего характера. Более 5000 довольных клиентов выбрали нас за честность, гарантию и сервис.</p>
+      <div class="intro-stats">
+        <div class="stat"><div class="stat-number">12+</div><div>лет экспертизы</div></div>
+        <div class="stat"><div class="stat-number">150+</div><div>моделей</div></div>
+        <div class="stat"><div class="stat-number">24/7</div><div>поддержка</div></div>
+      </div>
+      <button class="intro-btn" id="introMoreBtn">📖 История бренда</button>
+    </div>
+    <div class="intro-img">
+      <img src="images/intro-team.jpg" alt="Команда MotoRide">
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1>Свобода на двух колёсах <i>— твой мотоцикл ждёт</i></h1>
+      <p>Официальная гарантия, трейд-ин, кредит 0% и доставка по всей России. Более 150 моделей в наличии.</p>
+      <div class="btn-group">
+        <button class="btn-primary" id="heroShowBikesBtn">🔥 Смотреть каталог</button>
+        <button class="btn-secondary" id="heroTestDriveBtn">📅 Записаться на тест-драйв</button>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/hero-bike.jpg" alt="Мотоцикл Hero">
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <h2 class="section-title" id="catalogSection">🔥 Горячая коллекция 2025</h2>
+  <p class="section-sub">Выбери мотоцикл мечты — все кнопки внутри работают</p>
+  <div class="bikes-grid" id="bikesGrid"></div>
+
+  <div class="features" id="featuresBlock">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🏆</div>
+        <h3>Официальная гарантия</h3>
+        <p>3 года или 50 000 км</p>
+        <button class="btn-card details" id="featGaranty" style="margin-top:12px;">Узнать условия</button>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🚚</div>
+        <h3>Бесплатная доставка</h3>
+        <p>По Москве и области за 24ч</p>
+        <button class="btn-card details" id="featDelivery" style="margin-top:12px;">Проверить регион</button>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💳</div>
+        <h3>Кредит 0%</h3>
+        <p>Одобрение за 15 минут</p>
+        <button class="btn-card details" id="featCredit" style="margin-top:12px;">Рассчитать ставку</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="callback-form" id="callbackFormBlock">
+    <div class="form-text">
+      <h3>Не нашли подходящую модель?</h3>
+      <p>Оставьте заявку — подберём мотоцикл под ваш бюджет и стиль езды</p>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Ваше имя" id="callbackName">
+      <input type="tel" placeholder="+7 (___) ___-__-__" id="callbackPhone">
+      <button id="submitCallbackBtn">Отправить заявку</button>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-buttons">
+      <button class="footer-btn" id="footerPolicyBtn">📜 Политика конфиденциальности</button>
+      <button class="footer-btn" id="footerOfferBtn">📄 Публичная оферта</button>
+      <button class="footer-btn" id="footerSocialBtn">📸 Instagram</button>
+      <button class="footer-btn" id="footerSupportBtn">🛎️ Служба поддержки</button>
+    </div>
+    <p>© 2025 MotoRide — продажа мотоциклов с душой. Все права защищены.</p>
+  </div>
+</footer>
+
+<div id="toastMsg" class="toast-msg">✨ Действие выполнено</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
