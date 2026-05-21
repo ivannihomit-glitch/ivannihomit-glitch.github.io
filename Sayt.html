@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>FitBalance — умный спортивный трекер для похудения</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e0eef2 0%, #c2dbdf 100%);
+            min-height: 100vh;
+            padding: 20px 16px;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+        }
+
+        /* контейнер с максимальной шириной для больших экранов */
+        .tracker-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* главная карточка */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* шапка */
+        .hero-section {
+            background: linear-gradient(115deg, #1f4e3f 0%, #2a6b56 100%);
+            padding: 28px 28px 32px 28px;
+            color: white;
+        }
+
+        .hero-section h1 {
+            font-size: 1.9rem;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        .badge {
+            background: #ffb347;
+            font-size: 0.85rem;
+            padding: 4px 14px;
+            border-radius: 100px;
+            color: #1f4e3f;
+            font-weight: 600;
+        }
+
+        .hero-section p {
+            margin-top: 12px;
+            opacity: 0.88;
+            font-size: 1rem;
+            max-width: 85%;
+        }
+
+        /* 2 колонки — для планшета/пк */
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .form-panel {
+            flex: 1.2;
+            min-width: 280px;
+            background: #fefcf7;
+            padding: 28px 24px;
+            border-right: 1px solid #e7e2d4;
+        }
+
+        .result-panel {
+            flex: 1;
+            background: #ffffff;
+            padding: 28px 24px;
+        }
+
+        /* стили формы */
+        .input-field {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #2b5d4a;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e2dccc;
+            border-radius: 34px;
+            font-size: 1rem;
+            background: white;
+            transition: 0.2s;
+            outline: none;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus {
+            border-color: #2a6b56;
+            box-shadow: 0 0 0 3px rgba(42, 107, 86, 0.2);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 28px;
+            background: #f3f1ea;
+            padding: 10px 20px;
+            border-radius: 48px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-group input {
+            width: auto;
+            transform: scale(1.1);
+            margin: 0;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+        }
+
+        button {
+            background: #ff9142;
+            width: 100%;
+            border: none;
+            padding: 15px 18px;
+            border-radius: 44px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 6px 14px rgba(255, 145, 66, 0.3);
+        }
+
+        button:hover {
+            background: #e27e38;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* результат */
+        .kcal-circle {
+            background: #eef5f2;
+            border-radius: 32px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .kcal-number {
+            font-size: 3.4rem;
+            font-weight: 800;
+            color: #1f6e56;
+            line-height: 1;
+        }
+
+        .advice-type {
+            background: #fff2e6;
+            border-left: 6px solid #ff9142;
+            padding: 18px;
+            border-radius: 28px;
+            margin: 20px 0;
+        }
+
+        .workout-tip {
+            background: #f7f8fc;
+            border-radius: 24px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            border: 1px solid #eee8dd;
+            transition: 0.1s;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #1f4e3f;
+        }
+
+        h4 {
+            font-size: 1rem;
+            margin: 8px 0 4px;
+            color: #2c5a4b;
+        }
+
+        hr {
+            margin: 16px 0;
+            border: 0;
+            height: 1px;
+            background: #e7e2d4;
+        }
+
+        .small-note {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #8f8a7a;
+            margin-top: 20px;
+        }
+
+        /* Адаптив */
+        @media (max-width: 780px) {
+            body {
+                padding: 12px;
+            }
+            .form-panel {
+                border-right: none;
+                border-bottom: 1px solid #e7e2d4;
+            }
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+            .hero-section p {
+                max-width: 100%;
+            }
+            .two-columns {
+                flex-direction: column;
+            }
+            .radio-group {
+                gap: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .form-panel {
+                padding: 36px 32px;
+            }
+            .result-panel {
+                padding: 36px 32px;
+            }
+        }
+
+        .footer-meta {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5e6f68;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: #ff9142;
+        }
+    </style>
+</head>
+<body>
+<div class="tracker-wrapper">
+    <div class="glass-card">
+        <div class="hero-section">
+            <h1>
+                🧬 FitBalance Tracker 
+                <span class="badge">дефицит + спорт</span>
+            </h1>
+            <p>Рассчитайте коридор калорий для снижения веса и получите тактику тренировок: кардио, силовые или гибрид. Персонально под вас.</p>
+        </div>
+        <div class="two-columns">
+            <!-- Форма ввода данных -->
+            <div class="form-panel">
+                <form id="fitnessForm">
+                    <div class="input-field">
+                        <label>🧑‍🤝‍🧑 Пол</label>
+                        <div class="radio-group">
+                            <div><input type="radio" name="gender" value="female" id="genderF"> <label for="genderF">Женщина</label></div>
+                            <div><input type="radio" name="gender" value="male" id="genderM" checked> <label for="genderM">Мужчина</label></div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <label>📏 Рост (см)</label>
+                        <input type="number" id="height" value="168" step="1" placeholder="например 168">
+                    </div>
+
+                    <div class="input-field">
+                        <label>⚖️ Вес (кг)</label>
+                        <input type="number" id="weight" value="72" step="0.5" placeholder="вес в кг">
+                    </div>
+
+                    <div class="input-field">
+                        <label>🎂 Возраст (лет)</label>
+                        <input type="number" id="age" value="30" step="1" placeholder="полных лет">
+                    </div>
+
+                    <div class="input-field">
+                        <label>⚡ Уровень активности</label>
+                        <select id="activity">
+                            <option value="1.2">🛋️ Сидячий (офис, минимум спорта)</option>
+                            <option value="1.375" selected>🚶 Легкий (1-3 дня в неделю / прогулки)</option>
+                            <option value="1.55">🏃 Умеренный (3-5 дней тренировок)</option>
+                            <option value="1.725">💪 Высокий (6-7 дней в неделю)</option>
+                            <option value="1.9">🔥 Экстремальный (профессиональный спорт)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <label>🎯 Темп похудения</label>
+                        <select id="deficitMode">
+                            <option value="0.85">🍃 Мягкий дефицит (−15% ккал) — комфортное снижение</option>
+                            <option value="0.80" selected>⚡ Оптимальный (−20% ккал) — жиросжигание</option>
+                            <option value="0.75">🚀 Интенсивный (−25% ккал) — быстрый результат</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="calcButton">📉 Рассчитать калории и получить советы</button>
+                </form>
+                <div class="small-note">
+                    *Формула Mifflin-St Jeor + поправка на активность.
+                </div>
+            </div>
+
+            <!-- Панель результатов и рекомендаций -->
+            <div class="result-panel" id="resultPanel">
+                <div class="kcal-circle">
+                    <h3 style="margin-bottom: 6px;">🔥 Ваша цель — похудение</h3>
+                    <div class="kcal-number" id="caloriesValue">—</div>
+                    <div id="caloriesDesc" style="margin-top: 8px; font-size: 0.9rem;">ккал в день для стабильного дефицита</div>
+                    <div id="tdeeInfo" style="margin-top: 8px; font-size: 0.75rem; background: #e2e9e4; padding: 6px 12px; border-radius: 40px; display: inline-block;">ваш TDEE: —</div>
+                </div>
+
+                <div class="advice-type" id="trainingMainAdvice">
+                    <strong>🏋️‍♀️ 🧘 Рекомендованный тип тренировок:</strong><br>
+                    <span id="primaryTrainAdvice">— заполните данные —</span>
+                </div>
+
+                <h3>📌 Советы по упражнениям и активности</h3>
+                <div id="exerciseTipsContainer">
+                    <div class="workout-tip">✨ Введите параметры и нажмите «Рассчитать»</div>
+                </div>
+
+                <div id="extraMotivation" style="margin-top: 18px; background: #ebf3ef; border-radius: 28px; padding: 14px; font-size: 0.85rem;">
+                    💡 <strong>Профессиональный совет:</strong> Пейте больше воды и спите 7-9 часов — это ускоряет метаболизм и помогает контролировать аппетит.
+                </div>
+            </div>
+        </div>
+        <div class="footer-meta">
+            🧬 Персональный трекер — баланс между кардио и силовыми, адаптивный план на основе вашего ИМТ и целей.
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Элементы формы
+        const genderRadios = document.querySelectorAll('input[name="gender"]');
+        const heightInput = document.getElementById('height');
+        const weightInput = document.getElementById('weight');
+        const ageInput = document.getElementById('age');
+        const activitySelect = document.getElementById('activity');
+        const deficitSelect = document.getElementById('deficitMode');
+        const calcBtn = document.getElementById('calcButton');
+        
+        // Элементы вывода
+        const caloriesValueSpan = document.getElementById('caloriesValue');
+        const caloriesDescSpan = document.getElementById('caloriesDesc');
+        const tdeeInfoSpan = document.getElementById('tdeeInfo');
+        const primaryTrainAdviceSpan = document.getElementById('primaryTrainAdvice');
+        const exerciseTipsContainer = document.getElementById('exerciseTipsContainer');
+
+        // Функция расчёта BMR (Mifflin St Jeor)
+        function calculateBMR(weight, height, age, isMale) {
+            if (isMale) {
+                return 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                return 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+        }
+
+        // Получить выбранный пол (boolean)
+        function getIsMale() {
+            let selectedGender = document.querySelector('input[name="gender"]:checked').value;
+            return selectedGender === 'male';
+        }
+
+        // Валидация
+        function validateInputs(height, weight, age) {
+            if (isNaN(height) || height <= 0 || height > 280) {
+                alert("Пожалуйста, введите корректный рост (от 50 до 280 см)");
+                return false;
+            }
+            if (isNaN(weight) || weight <= 0 || weight > 300) {
+                alert("Введите корректный вес (от 10 до 300 кг)");
+                return false;
+            }
+            if (isNaN(age) || age <= 0 || age > 120) {
+                alert("Укажите возраст от 1 до 120 лет");
+                return false;
+            }
+            return true;
+        }
+
+        // Расчет и генерация всех рекомендаций
+        function calculateAndAdvise() {
+            // Получаем значения
+            let height = parseFloat(heightInput.value);
+            let weight = parseFloat(weightInput.value);
+            let age = parseInt(ageInput.value);
+            let activityFactor = parseFloat(activitySelect.value);
+            let deficitFactor = parseFloat(deficitSelect.value);
+            let isMale = getIsMale();
+
+            if (!validateInputs(height, weight, age)) return;
+
+            // BMR + TDEE
+            let bmr = calculateBMR(weight, height, age, isMale);
+            let tdee = bmr * activityFactor;
+            let caloriesForLoss = tdee * deficitFactor;
+
+            // Безопасные пороги (не менее 1200 для женщин, 1500 для мужчин)
+            const minSafe = isMale ? 1500 : 1200;
+            let deficitPercent = Math.round((1 - deficitFactor) * 100);
+            let tdeeRounded = Math.round(tdee);
+            let finalCalories = Math.round(caloriesForLoss);
+            
+            if (finalCalories < minSafe) {
+                finalCalories = minSafe;
+                caloriesDescSpan.innerHTML = `⚠️ Безопасный минимум (${minSafe} ккал). Не рекомендуется опускаться ниже. Дефицит скорректирован.`;
+            } else {
+                caloriesDescSpan.innerHTML = `Дефицит ${deficitPercent}% от TDEE (${tdeeRounded} ккал/день) • плавное жиросжигание`;
+            }
+            
+            caloriesValueSpan.innerHTML = finalCalories;
+            tdeeInfoSpan.innerHTML = `ваш TDEE: ${tdeeRounded} ккал | Базовый обмен: ${Math.round(bmr)} ккал`;
+
+            // Доп. показатели: ИМТ
+            let bmi = weight / ((height/100) ** 2);
+            let bmiCategory = "";
+            if (bmi < 18.5) bmiCategory = "дефицит массы";
+            else if (bmi >= 18.5 && bmi < 25) bmiCategory = "норма";
+            else if (bmi >= 25 && bmi < 30) bmiCategory = "избыточный вес";
+            else bmiCategory = "ожирение";
+
+            // ----- Генерация умных советов (кардио/силовые) -----
+            let trainingType = "";
+            let exerciseList = [];
+            
+            // АНАЛИЗ для выбора приоритета: кардио или силовые + комбинированные советы
+            // используем ИМТ, возраст, пол, активность
+            const isHighActivity = activityFactor >= 1.55;
+            const ageAbove40 = age > 40;
+            
+            // Базовый алгоритм рекомендации по типу тренировок
+            if (bmi >= 30) {
+                trainingType = "🏊‍♂️ ПРИОРИТЕТ КАРДИО НИЗКОЙ ИНТЕНСИВНОСТИ: плавание, ходьба, эллипс, велосипед. 🔹 Силовые 2 раза в неделю (легкие веса / собственный вес).";
+            } 
+            else if (bmi >= 25 && bmi < 30) {
+                trainingType = "🔥 КОМБО: ФОКУС НА ЖИРОСЖИГАНИЕ. Рекомендуется 3 кардио (интервальное или умеренное) + 2-3 силовые тренировки для сохранения мышц.";
+            }
+            else if (bmi >= 18.5 && bmi < 25) {
+                if (deficitFactor <= 0.8) {
+                    trainingType = "🎯 СИЛОВЫЕ + КАРДИО ДЛЯ РЕКОМПОЗИЦИИ: 3 силовые (база) и 2 кардио-сессии высокой интенсивности. Это поможет сжечь жир и подтянуть фигуру.";
+                } else {
+                    trainingType = "⚖️ БАЛАНС: 2-3 силовых и 2 кардио в неделю (бег, велосипед). Увеличьте NEAT-активность (больше шагов).";
+                }
+            }
+            else { // bmi < 18.5
+                trainingType = "🍏 СИЛОВЫЕ ПРИОРИТЕТ: Вам важно нарастить мышечную массу, а не худеть агрессивно. Кардио — легкое (2 раза/нед). Добавьте протеин.";
+            }
+            
+            // Уточнение для возраста >40
+            if (ageAbove40 && trainingType.includes("КАРДИО")) {
+                trainingType += " Для суставов выбирайте плавание или эллипс. Обязательна разминка и заминка.";
+            } else if (ageAbove40) {
+                trainingType += " Уделите внимание растяжке и мобильности суставов перед силовыми.";
+            }
+            
+            // Детализированные советы по упражнениям
+            if (bmi >= 30) {
+                exerciseList = [
+                    "🚶‍♀️ Ежедневная ходьба 6000-8000 шагов (низкий порог).",
+                    "🏊‍♂️ Плавание брассом / кролем — 30 мин 3 раза в неделю",
+                    "🦵 Упражнения сидя: подъемы ног, сгибания рук с легкими гантелями",
+                    "🧘‍♀️ Йога или пилатес для улучшения подвижности"
+                ];
+            } 
+            else if (bmi >= 25) {
+                if (isMale) {
+                    exerciseList = [
+                        "🏋️ Жим гантелей стоя / отжимания от пола (3×12) для сохранения мышц",
+                        "🏃 Интервальная ходьба: 2 мин быстрый шаг / 1 мин медленный — 20 мин",
+                        "🚴 Велотренажер или сайкл — 30 мин среднего темпа",
+                        "🍑 Выпады и приседания с весом тела — 3 подхода"
+                    ];
+                } else {
+                    exerciseList = [
+                        "🍑 Приседания сумо + ягодичный мостик (3×15)",
+                        "🔥 Кардио-круг: берпи (облегченные), прыжки на месте — 15 мин",
+                        "🏋️‍♀️ Тяга верхнего блока или резины к поясу",
+                        "🚶‍♀️ Быстрая ходьба в горку на беговой дорожке"
+                    ];
+                }
+                if (deficitFactor <= 0.8) exerciseList.push("💪 Добавьте 2 дополнительных силовых дня (спина + грудь)");
+            }
+            else { // нормальный вес или недостаток
+                if (bmi < 18.5) {
+                    exerciseList = [
+                        "🏋️‍♂️ Силовые 3-4 раза в неделю: становая тяга, подтягивания с резиной, жим ногами",
+                        "🍗 Увеличьте белок после тренировок для роста мышц",
+                        "🧘 Пилатес для улучшения осанки",
+                        "🚴 Легкое кардио 1 раз в неделю по желанию"
+                    ];
+                } else {
+                    exerciseList = [
+                        "🏋️‍♀️ Круговая тренировка: приседания, отжимания, планка, выпады (30 сек работы / 15 отдыха)",
+                        "🏃 Бег трусцой или интервальный спринт 2 раза/нед",
+                        "🤸‍♂️ Скакалка — отличное кардио для жиросжигания",
+                        "🧘 Растяжка после каждой тренировки для восстановления"
+                    ];
+                }
+            }
+            
+            // Дополнительные советы, связанные с активностью
+            if (activityFactor <= 1.375) {
+                exerciseList.unshift("🚀 Низкая активность: начните с 15-минутной зарядки утром и увеличивайте NEAT (лифт заменить на лестницу)");
+            } else if (activityFactor >= 1.725) {
+                exerciseList.push("⚠️ Высокая активность: не забывайте про дни отдыха и качественное восстановление, иначе риск перетренированности.");
+            }
+            
+            // Специфический совет по типу тренировок для женщин / мужчин
+            if (!isMale && bmi < 27) {
+                exerciseList.push("✨ Используйте функциональные тренировки: выпады с резиной, боковые планки, ягодичный мостик.");
+            }
+            
+            // Удалить дубли и лишнее (простые уникальные советы)
+            const uniqueTips = [...new Map(exerciseList.map(tip => [tip.trim(), tip])).values()];
+            const finalTips = uniqueTips.slice(0, 5);
+            
+            // Обновляем DOM
+            primaryTrainAdviceSpan.innerHTML = trainingType;
+            
+            // отрисовка карточек упражнений
+            if (finalTips.length === 0) {
+                exerciseTipsContainer.innerHTML = `<div class="workout-tip">💪 Начните с ходьбы 30 минут в день + базовые приседания и отжимания</div>`;
+            } else {
+                let tipsHtml = '';
+                finalTips.forEach(tip => {
+                    tipsHtml += `<div class="workout-tip">✔️ ${tip}</div>`;
+                });
+                exerciseTipsContainer.innerHTML = tipsHtml;
+            }
+            
+            // маленькая анимация для смены цифр (просто визуальный эффект)
+            caloriesValueSpan.style.transform = "scale(1.02)";
+            setTimeout(() => { if(caloriesValueSpan) caloriesValueSpan.style.transform = ""; }, 200);
+        }
+        
+        // Обработчик отправки формы
+        const form = document.getElementById('fitnessForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            calculateAndAdvise();
+        });
+        
+        // При загрузке страницы сразу же выполнить расчёт с дефолтными значениями
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateAndAdvise();
+        });
+        
+        // Дополнительно: слушаем изменения на инпутах, но только по кнопке (чтобы не перегружать)
+        // Добавим авто-обновление по изменению пола для более быстрого UX (опционально)
+        const autoRefreshElements = [heightInput, weightInput, ageInput, activitySelect, deficitSelect];
+        function autoRefreshOnChange() {
+            calculateAndAdvise();
+        }
+        genderRadios.forEach(radio => radio.addEventListener('change', autoRefreshOnChange));
+        autoRefreshElements.forEach(el => el.addEventListener('input', autoRefreshOnChange));
+        // Но для select изменение тоже 
+        activitySelect.addEventListener('change', autoRefreshOnChange);
+        deficitSelect.addEventListener('change', autoRefreshOnChange);
+        
+        // небольшая правка: при ручном вводе чисел не флудим алертами при каждом тике, но validateInputs сработает только в calculate, а если вводят некорректный данные, то калькуляция не будет обновлять до нажатия? на самом деле autoRefreshOnChange вызывает calculateAndAdvise, который содержит валидацию и предупреждения при каждом промахе. 
+        // Сделаем "тихую" обработку без алертов при вводе, чтобы не бесить пользователя, но при кнопке алерт будет. А в автообновлении просто не показываем alert, а сбрасываем результат на прочерк? 
+        // Улучшим: сделаем специальную тихую валидацию.
+        const originalValidate = validateInputs;
+        window.silentValidate = function(height, weight, age) {
+            if (isNaN(height) || height <= 0 || height > 280) return false;
+            if (isNaN(weight) || weight <= 0 || weight > 300) return false;
+            if (isNaN(age) || age <= 0 || age > 120) return false;
+            return true;
+        };
+        
+        // Переопределим для авто-расчёта без алертов
+        function silentCalculate() {
+            let height = parseFloat(heightInput.value);
+            let weight = parseFloat(weightInput.value);
+            let age = parseInt(ageInput.value);
+            let activityFactor = parseFloat(activitySelect.value);
+            let deficitFactor = parseFloat(deficitSelect.value);
+            let isMale = getIsMale();
+            if (!window.silentValidate(height, weight, age)) {
+                caloriesValueSpan.innerHTML = "—";
+                caloriesDescSpan.innerHTML = "⚠️ Некорректные данные";
+                primaryTrainAdviceSpan.innerHTML = "Введите корректный рост, вес и возраст";
+                exerciseTipsContainer.innerHTML = `<div class="workout-tip">📝 Проверьте введённые значения</div>`;
+                return;
+            }
+            let bmr = calculateBMR(weight, height, age, isMale);
+            let tdee = bmr * activityFactor;
+            let caloriesForLoss = tdee * deficitFactor;
+            const minSafe = isMale ? 1500 : 1200;
+            let finalCalories = Math.round(caloriesForLoss);
+            if (finalCalories < minSafe) finalCalories = minSafe;
+            caloriesValueSpan.innerHTML = finalCalories;
+            let tdeeRounded = Math.round(tdee);
+            let deficitPercent = Math.round((1 - deficitFactor) * 100);
+            caloriesDescSpan.innerHTML = `Дефицит ${deficitPercent}% от TDEE (${tdeeRounded} ккал)`;
+            tdeeInfoSpan.innerHTML = `ваш TDEE: ${tdeeRounded} ккал | БМР: ${Math.round(bmr)} ккал`;
+            let bmi = weight / ((height/100) ** 2);
+            let trainingType = "";
+            if (bmi >= 30) trainingType = "🏊‍♂️ ПРИОРИТЕТ КАРДИО НИЗКОЙ ИНТЕНСИВНОСТИ + лёгкие силовые";
+            else if (bmi >= 25) trainingType = "🔥 КОМБО: кардио 3 раза, силовые 2-3 раза в неделю";
+            else if (bmi >= 18.5) trainingType = "⚖️ БАЛАНС силовые / кардио (2-3/2) для тонуса и жиросжигания";
+            else trainingType = "🍏 СИЛОВЫЕ ПРИОРИТЕТ: наращивание мышечной массы";
+            if (age > 40) trainingType += " • Акцент на профилактику суставов.";
+            primaryTrainAdviceSpan.innerHTML = trainingType;
+            let basicTips = [];
+            if (bmi >= 30) basicTips = ["🚶‍♀️ Ходьба 6000+ шагов", "🏊‍♂️ Плавание 2-3 раза/нед", "🧘 Йога для гибкости"];
+            else if (bmi >= 25) basicTips = ["🏃 Интервальное кардио", "🏋️ Приседания/выпады", "🚴 Велотренажёр"];
+            else basicTips = ["🏋️‍♀️ Круговая тренировка", "🤸‍♂️ Скакалка/бег", "🧘 Растяжка"];
+            let tipsHtml = basicTips.map(t => `<div class="workout-tip">✔️ ${t}</div>`).join('');
+            exerciseTipsContainer.innerHTML = tipsHtml || `<div class="workout-tip">✨ Индивидуальный план готов</div>`;
+        }
+        
+        // заменим обработчики автообновления на бесшумную версию
+        const newAutoHandler = () => silentCalculate();
+        genderRadios.forEach(radio => radio.removeEventListener('change', autoRefreshOnChange));
+        autoRefreshElements.forEach(el => el.removeEventListener('input', autoRefreshOnChange));
+        activitySelect.removeEventListener('change', autoRefreshOnChange);
+        deficitSelect.removeEventListener('change', autoRefreshOnChange);
+        
+        genderRadios.forEach(radio => radio.addEventListener('change', newAutoHandler));
+        autoRefreshElements.forEach(el => el.addEventListener('input', newAutoHandler));
+        activitySelect.addEventListener('change', newAutoHandler);
+        deficitSelect.addEventListener('change', newAutoHandler);
+        
+        // кнопка с полным расчетом и алертами (пользовательский контроль)
+        calcBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            calculateAndAdvise();
+        });
+        
+        window.silentCalculate = silentCalculate;
+        silentCalculate();
+    })();
+</script>
+</body>
+</html>
