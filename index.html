@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>FitBalance — умный спортивный трекер для похудения</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="tracker-wrapper">
+    <div class="glass-card">
+        <div class="hero-section">
+            <h1>
+                🧬 FitBalance Tracker 
+                <span class="badge">дефицит + спорт</span>
+            </h1>
+            <p>Рассчитайте коридор калорий для снижения веса и получите тактику тренировок: кардио, силовые или гибрид. Персонально под вас.</p>
+        </div>
+        <div class="two-columns">
+           
+            <div class="form-panel">
+                <form id="fitnessForm">
+                    <div class="input-field">
+                        <label>🧑‍🤝‍🧑 Пол</label>
+                        <div class="radio-group">
+                            <div><input type="radio" name="gender" value="female" id="genderF"> <label for="genderF">Женщина</label></div>
+                            <div><input type="radio" name="gender" value="male" id="genderM" checked> <label for="genderM">Мужчина</label></div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <label>📏 Рост (см)</label>
+                        <input type="number" id="height" value="168" step="1" placeholder="например 168">
+                    </div>
+
+                    <div class="input-field">
+                        <label>⚖️ Вес (кг)</label>
+                        <input type="number" id="weight" value="72" step="0.5" placeholder="вес в кг">
+                    </div>
+
+                    <div class="input-field">
+                        <label>🎂 Возраст (лет)</label>
+                        <input type="number" id="age" value="30" step="1" placeholder="полных лет">
+                    </div>
+
+                    <div class="input-field">
+                        <label>⚡ Уровень активности</label>
+                        <select id="activity">
+                            <option value="1.2">🛋️ Сидячий (офис, минимум спорта)</option>
+                            <option value="1.375" selected>🚶 Легкий (1-3 дня в неделю / прогулки)</option>
+                            <option value="1.55">🏃 Умеренный (3-5 дней тренировок)</option>
+                            <option value="1.725">💪 Высокий (6-7 дней в неделю)</option>
+                            <option value="1.9">🔥 Экстремальный (профессиональный спорт)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <label>🎯 Темп похудения</label>
+                        <select id="deficitMode">
+                            <option value="0.85">🍃 Мягкий дефицит (−15% ккал) — комфортное снижение</option>
+                            <option value="0.80" selected>⚡ Оптимальный (−20% ккал) — жиросжигание</option>
+                            <option value="0.75">🚀 Интенсивный (−25% ккал) — быстрый результат</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="calcButton">📉 Рассчитать калории и получить советы</button>
+                </form>
+                <div class="small-note">
+                    *Формула Mifflin-St Jeor + поправка на активность.
+                </div>
+            </div>
+
+            <div class="result-panel" id="resultPanel">
+                <div class="kcal-circle">
+                    <h3 style="margin-bottom: 6px;">🔥 Ваша цель — похудение</h3>
+                    <div class="kcal-number" id="caloriesValue">—</div>
+                    <div id="caloriesDesc" style="margin-top: 8px; font-size: 0.9rem;">ккал в день для стабильного дефицита</div>
+                    <div id="tdeeInfo" style="margin-top: 8px; font-size: 0.75rem; background: #e2e9e4; padding: 6px 12px; border-radius: 40px; display: inline-block;">ваш TDEE: —</div>
+                </div>
+
+                <div class="advice-type" id="trainingMainAdvice">
+                    <strong>🏋️‍♀️ 🧘 Рекомендованный тип тренировок:</strong><br>
+                    <span id="primaryTrainAdvice">— заполните данные —</span>
+                </div>
+
+                <h3>📌 Советы по упражнениям и активности</h3>
+                <div id="exerciseTipsContainer">
+                    <div class="workout-tip">✨ Введите параметры и нажмите «Рассчитать»</div>
+                </div>
+
+                <div id="extraMotivation" style="margin-top: 18px; background: #ebf3ef; border-radius: 28px; padding: 14px; font-size: 0.85rem;">
+                    💡 <strong>Профессиональный совет:</strong> Пейте больше воды и спите 7-9 часов — это ускоряет метаболизм и помогает контролировать аппетит.
+                </div>
+            </div>
+        </div>
+        <div class="footer-meta">
+            🧬 Персональный трекер — баланс между кардио и силовыми, адаптивный план на основе вашего ИМТ и целей.
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
